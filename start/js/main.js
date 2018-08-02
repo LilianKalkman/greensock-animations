@@ -14,6 +14,7 @@
     */
 
     var $coin = $('#Coin'),
+        path = [{x: -90, y: 120}, {x:-45, y: -220}, {x: 0, y: 120}],
         $Petr = $('#Petr'),
         $h1 = $('h1'),
         $MainBulb = $('#MainBulb'),
@@ -118,8 +119,16 @@
                 .fromTo($BulbIdeaLigth, 0.3, {fill: '#ffffff'}, {fill: '#73C996', repeat: 3, yoyo: true})
                 .fromTo($BulbIdeaLigth, 0.3, {fill: '#ffffff'}, {fill: '#F8876E', repeat: 3, yoyo: true})
                 .fromTo($BulbIdeaLigth, 0.8, {fill: '#ffffff'}, {fill: '#F8AD43'})
-                .to($h1, 0.3, {y: '+=20px', autoAlpha: 1, ease: Power4.easeInOut})
-                .to($h1, 0.8, {y: '+=10px', autoAlpha: 0, ease: Power4.easeInOut}, '+=2')
+                .to($BulbIdea, 0.6, {y: '-=20px', scale: 1.1, transformOrigin: 'center bottom', ease: Power4.easeOut })
+                .to($BulbIdea, 0.3, {y: '+=120px', scale: 0.8, ease: Back.easeIn})
+                .set($coin, {autoAlpha: 1}, '+=0.3')
+                .to($coin, 6, {rotation: 720, bezier: {curviness: 0.3, values: path}, ease: SlowMo.ease.config(0.9, 0.7, false)})
+                .to($h1, 0.3, {y: '+=20px', autoAlpha: 1, ease: Power4.easeInOut}, '-=5.5')
+                .to($h1, 0.8, {y: '+=10px', autoAlpha: 0, ease: Power4.easeInOut}, '-=3.5')
+                .set($h1, {y: '-=30px', text: "Let's Greensock do the rest!"}, '-=3.3')
+                .to($h1, 0.3, {y: '+=20px', autoAlpha: 1, ease: Power4.easeInOut}, '-=3.2')
+                .to($h1, 0.8, {y: '+=10px', autoAlpha: 0, ease: Power4.easeInOut}, '-=1.2')
+                .to($part1, 0.06, {rotation: 5, y: '+=5px', x: '+=3px', transformOrigin: 'bottom right', repeat: 5, yoyo:true})
                 ;
 
 
@@ -132,7 +141,7 @@
             .add(getIntroTL(), 'scene-intro')
             .add(getIdeaTL(), 'scene-idea');
 
-        mainTL.seek('scene-idea-=3');
+        mainTL.seek('scene-idea');
     }
 
     init();
