@@ -17,6 +17,9 @@
         $Petr = $('#Petr'),
         $h1 = $('h1'),
         $MainBulb = $('#MainBulb'),
+        $BulbIdea = $('#BulbIdea'),
+        $BulbIdeaLigth = $('#MainBulb2'),
+        $part1 = $('#Part1'),
         $Liquids = $('.liquid'),
         $Liquid1 = $('#Liquid1'),
         $Liquid2 = $('#Liquid2'),
@@ -103,10 +106,33 @@
         return introTL;
     }
 
+    function getIdeaTL() {
+        var idealTL = new TimelineMax();
+
+            idealTL
+                .to($BulbIdea, 0.5, {autoAlpha: 1, y: '-=10px', ease: Bounce.easeOut})
+                .set($h1, {y: '-=30px', text: "You have a cool idea, right?"})
+                .to($h1, 0.3, {y: '+=20px', autoAlpha: 1, ease: Power4.easeInOut})
+                .to($h1, 0.8, {y: '+=10px', autoAlpha: 0, ease: Power4.easeInOut}, '+=2')
+                .set($h1, {y: '-=30px', text: "And now what?"})
+                .fromTo($BulbIdeaLigth, 0.3, {fill: '#ffffff'}, {fill: '#73C996', repeat: 3, yoyo: true})
+                .fromTo($BulbIdeaLigth, 0.3, {fill: '#ffffff'}, {fill: '#F8876E', repeat: 3, yoyo: true})
+                .fromTo($BulbIdeaLigth, 0.8, {fill: '#ffffff'}, {fill: '#F8AD43'})
+                .to($h1, 0.3, {y: '+=20px', autoAlpha: 1, ease: Power4.easeInOut})
+                .to($h1, 0.8, {y: '+=10px', autoAlpha: 0, ease: Power4.easeInOut}, '+=2')
+                ;
+
+
+        return idealTL;
+    }
+
     function init(){
         mainTL
             .add(clearStage())
-            .add(getIntroTL(), 'scene-intro');
+            .add(getIntroTL(), 'scene-intro')
+            .add(getIdeaTL(), 'scene-idea');
+
+        mainTL.seek('scene-idea-=3');
     }
 
     init();
