@@ -21,6 +21,7 @@
         $BulbIdea = $('#BulbIdea'),
         $BulbIdeaLigth = $('#MainBulb2'),
         $part1 = $('#Part1'),
+        $pointer = $('#pointer'),
         $Liquids = $('.liquid'),
         $Liquid1 = $('#Liquid1'),
         $Liquid2 = $('#Liquid2'),
@@ -76,6 +77,7 @@
             .set($LiquidInsideMask5, {attr: {y: 654}})
             .set($LiquidInsideMask6, {attr: {y: 651}})
             .set($LiquidInsideMask7, {attr: {y: 651}})
+            .set($pointer, {rotation: -45, transformOrigin: 'bottom center'})
             .set($paper, {y: 611})
             .set($Petr, {autoAlpha: 1, scale: 2.5, x: '1400%', transformOrigin: 'bottom center'});
 
@@ -135,14 +137,31 @@
         return idealTL;
     }
 
+
+    function getPart2Tl() {
+        var part2TL = new TimelineMax();
+
+        part2TL
+            .to($pointer, {rotation: 20})
+            .staggerTo($part2light, 0.1, {fill: '#F8AD43'}, 0.1)
+            .staggerTo($part2light, 0.1, {fill: '#F8876E'}, 0.1)
+            .staggerTo($part2light, 0.1, {fill: '#73C996'}, 0.1)
+        ;
+
+        return part2TL;
+    }
+
+
     function init(){
         mainTL
             .add(clearStage())
             .add(getIntroTL(), 'scene-intro')
-            .add(getIdeaTL(), 'scene-idea');
+            .add(getIdeaTL(), 'scene-idea')
+            .add(getPart2Tl(), 'scene-part2');
 
-        mainTL.seek('scene-idea');
+        mainTL.seek('scene-part2-=2');
     }
+
 
     init();
 
